@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Items</title>
+</head>
+<body>
+    <div class="items">
+        <% for(let i=0;i<rows.length;i++) { %>
+            <div>
+                <h2><%= rows[i].itemname %></h2>
+                <img src="<%= rows[i].imgurl %>" alt="<%=rows[i].description%>">
+                <p><%= rows[i].description %></p>
+                <p><%= rows[i].quantity %></p>
+            </div>
+         <% } %> 
+    </div>
+</body>
+</html>
