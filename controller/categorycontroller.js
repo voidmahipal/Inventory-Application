@@ -1,4 +1,4 @@
-import { getAllCategories } from "../db/queries.js";
+import { getAllCategories,getItemsWithCategotyId,insertCategory } from "../db/queries.js";
 
 async function getCategoryContent(req,res,next) {
     
@@ -10,5 +10,27 @@ async function getCategoryContent(req,res,next) {
         next(err);
     }
 }
+async function getItemsInCategory(req,res,next) {
+    
+    const {categoryId} = req.params; 
+    try{
+        console.log("Category ID received:", categoryId);
+        const rows = await getItemsWithCategotyId(categoryId);
+        res.render("itemsincategory",{rows:rows,categoryId:categoryId});
+    }
+    catch(err) {
+        next(err);
+    }
+}
+async function addCategory(req,res,next) {
+    
+    const {name} = req.body;
+    try{
+        await insertCategory(name);
+        res.redirect("/category");
+    }catch(err) {
+        next(err);
+    }
+}
 
-export {getCategoryContent};
+export {getCategoryContent,getItemsInCategory,addCategory};
