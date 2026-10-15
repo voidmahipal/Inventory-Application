@@ -1,9 +1,10 @@
+import "dotenv/config";
 import { Client } from "pg";
 
 async function main() {
     console.log("seeding...");
     const client = new Client({
-        connectionString:"postgresql://postgres:M$S9S%40aat@localhost:5432/inventory",
+        connectionString:process.env.DB_connectionstring,
     });
     await client.connect();
 

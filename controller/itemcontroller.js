@@ -14,9 +14,19 @@ async function addItems(req,res,next) {
     
     const {name,imgurl,description,quantity} = req.body;
     const {categoryId} = req.params;
+
+    let imgURL;
+    try{
+        imgURL = new URL(imgurl);
+        if(!['http:','https:'].includes(imgURL.protocol)) {
+            return res.status(404).send("Image url must start with http: or https:");
+        }
+    }
+    catch {
+        return res.status(404).send("Please enter a valid url");
+    }
     try{
         await insertItem({name,imgurl,description,quantity,categoryId});
-        console.log("Redirecting to category:", categoryId);
         res.redirect(`/category/${categoryId}`);
     }catch(err) {
         next(err);

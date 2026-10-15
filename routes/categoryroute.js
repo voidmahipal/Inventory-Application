@@ -4,6 +4,13 @@ import { getAddCategoryForm } from "../controller/formcontroller.js";
 
 const categoryRouter = Router({mergeParams:true});
 
+categoryRouter.param("categoryId",(req,res,next,value)=>{
+    if(!/^[1-9]\d*$/.test(value)) {
+        return res.status(400).send("Invalid category ID");
+    }
+    next();
+});
+
 categoryRouter.get("/",getCategoryContent);
 categoryRouter.get("/add",getAddCategoryForm);
 categoryRouter.post("/add",addCategory);

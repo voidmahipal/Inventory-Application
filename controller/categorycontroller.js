@@ -14,7 +14,6 @@ async function getItemsInCategory(req,res,next) {
     
     const {categoryId} = req.params; 
     try{
-        console.log("Category ID received:", categoryId);
         const rows = await getItemsWithCategotyId(categoryId);
         res.render("itemsincategory",{rows:rows,categoryId:categoryId});
     }
