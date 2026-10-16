@@ -4,10 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View Items</title>
+    <link rel="stylesheet" href="/app.css">
 </head>
 <body>
-    <button onclick="window.location.href='/items/<%=categoryId%>/add'" >Add Items</button>
-    <button onclick="window.location.href='/category/delete/<%=categoryId%>'" >Delete this category</button>
+    <div class="page-actions">
+        <button onclick="window.location.href='/items/<%=categoryId%>/add'" >Add Items</button>
+        <button onclick="window.location.href='/category/delete/<%=categoryId%>'" >Delete this category</button>
+    </div>
     <div class="itemsInCategory">
         <% for(let i=0;i<rows.length;i++) { %>
             <div>
