@@ -7,6 +7,7 @@
 </head>
 <body>
     <button onclick="window.location.href='/items/<%=categoryId%>/add'" >Add Items</button>
+    <button onclick="window.location.href='/category/delete/<%=categoryId%>'" >Delete this category</button>
     <div class="itemsInCategory">
         <% for(let i=0;i<rows.length;i++) { %>
             <div>
@@ -14,6 +15,7 @@
                 <img src="<%= rows[i].imgurl %>" alt="<%=rows[i].description%>">
                 <p><%= rows[i].description %></p>
                 <p><%= rows[i].quantity %></p>
+                <button onclick="window.location.href='/items/delete/<%=rows[i].id%>'" >Delete</button>
             </div>
          <% } %> 
     </div>

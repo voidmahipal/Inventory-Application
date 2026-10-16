@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getItemsContent,addItems } from "../controller/itemcontroller.js";
+import { getItemsContent,addItems,deleteItems,validateAdminAndDeleteItem } from "../controller/itemcontroller.js";
 import { getAddItemForm } from "../controller/formcontroller.js";
 
 const itemsRouter = Router({mergeParams:true});
@@ -14,5 +14,7 @@ itemsRouter.param("categoryId",(req,res,next,value)=>{
 itemsRouter.get("/",getItemsContent);
 itemsRouter.get("/:categoryId/add",getAddItemForm);
 itemsRouter.post("/:categoryId/add",addItems);
+itemsRouter.get("/delete/:itemId",deleteItems);
+itemsRouter.post("/delete/:itemId",validateAdminAndDeleteItem);
 
 export default itemsRouter;

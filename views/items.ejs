@@ -13,6 +13,7 @@
                 <img src="<%= rows[i].imgurl %>" alt="<%=rows[i].description%>">
                 <p><%= rows[i].description %></p>
                 <p><%= rows[i].quantity %></p>
+                <button onclick="window.location.href='/items/delete/<%=rows[i].id%>'">Delete</button>
             </div>
          <% } %> 
     </div>

@@ -1,4 +1,4 @@
-import { getAllItems,insertItem } from "../db/queries.js";
+import { getAllItems,insertItem,checkIfItemExist,deleteItemFromDB } from "../db/queries.js";
 
 async function getItemsContent(req,res,next) {
     
@@ -32,5 +32,40 @@ async function addItems(req,res,next) {
         next(err);
     }
 }
+async function deleteItems(req,res,next) {
+    
+    const {itemId} = req.params;
+    try{
+        if(await checkIfItemExist(itemId)) {
+            res.render("validateitem",{itemId:itemId});
+        }
+        else{
+            res.send("No such category exists!!");
+        }
+    }catch(err) {
+        next(err);
+    }
+}
+async function validateAdminAndDeleteItem(req,res,next) {
+    const {itemId} = req.params;
+    const {password} = req.body;
+    try{
+        if(await checkIfItemExist(itemId)) {
+            if(password===process.env.PASSWORD) {
+                const categoryId = await deleteItemFromDB(itemId);
+                res.redirect(`/category/${categoryId}`);
+            }
+            else{
+                res.send("Wrong Password");
+            }
+        }
+        else{
+            res.send("Invalid item");
+        }
+    }
+    catch(err) {
+        next(err);
+    }
+}
 
-export {getItemsContent,addItems};
+export {getItemsContent,addItems,deleteItems,validateAdminAndDeleteItem};

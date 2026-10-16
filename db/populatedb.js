@@ -11,7 +11,7 @@ async function main() {
     await client.query("CREATE TABLE IF NOT EXISTS category (id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,categoryname VARCHAR(255) NOT NULL );");
     await client.query("INSERT INTO category (categoryname) VALUES ('Guitar'),('Violin'),('Piano'),('Drums'),('Flute'),('Trumpet'),('Saxophone'),('Cello'),('Harp'),('Clarinet'),('Tabla'),('Sitar'),('Ukulele'),('Accordion'),('Banjo');");
 
-    await client.query("CREATE TABLE IF NOT EXISTS items (id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,itemname VARCHAR(255),imgurl VARCHAR(255),description VARCHAR(255),quantity INTEGER,categoryid INTEGER REFERENCES category(id))");
+    await client.query("CREATE TABLE IF NOT EXISTS items (id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,itemname VARCHAR(255),imgurl VARCHAR(255),description VARCHAR(255),quantity INTEGER,categoryid INTEGER REFERENCES category(id) ON DELETE CASCADE)");
 
     await client.query("INSERT INTO items (itemname, imgurl, description, quantity, categoryid) VALUES ('Yamaha F310 Acoustic Guitar', 'https://loremflickr.com/640/480/acousticguitar', 'Beginner-friendly acoustic guitar with a natural finish.', 10, (SELECT id FROM category WHERE categoryName = 'Guitar'));");
     await client.query("INSERT INTO items (itemname, imgurl, description, quantity, categoryid) VALUES ('Fender Stratocaster Electric Guitar', 'https://loremflickr.com/640/480/electricguitar', 'Versatile electric guitar suitable for rock and blues.', 5, (SELECT id FROM category WHERE categoryName = 'Guitar'));");
