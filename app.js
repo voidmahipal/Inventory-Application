@@ -1,5 +1,6 @@
 import express from "express"
 import path from "node:path"
+import "dotenv/config"
 import { fileURLToPath } from "node:url";
 import indexRouter from "./routes/indexroute.js";
 import categoryRouter from "./routes/categoryroute.js";
@@ -20,10 +21,11 @@ app.use("/",indexRouter);
 app.use("/category",categoryRouter);
 app.use("/items",itemsRouter);
 
-app.listen(3000,(err)=>{
+const PORT = process.env.PORT || 3000;
+app.listen(PORT,(err)=>{
     if(err) {
         console.error(err);
         return;
     }
-    console.log("Server is listening at port 3000");
+    console.log(`Server is listening at port ${PORT}`);
 });
